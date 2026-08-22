@@ -2,6 +2,12 @@
 
 A working online booking calendar for pergola design consultations, ready to add to the outdoor.ie WordPress site.
 
+**Built by Loggdin** for The Outdoor Scene. Free to reuse and adapt for other booking pages.
+
+**Before you start, you'll need:**
+- A **Cal.com** account with one event type set up (Step 1 below walks through it).
+- **WordPress admin** access to outdoor.ie to add the page.
+
 **Nothing gets installed.** No plugin, no theme change, no changes to email, hosting or domain settings. It is one new page with one block of code on it. To remove it, delete the page.
 
 ---
