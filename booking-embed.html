@@ -1,29 +1,51 @@
 <!--
   ============================================================================
   THE OUTDOOR SCENE — pergola consultation booking calendar
-
+  ============================================================================
   WHERE THIS GOES
-  Paste everything below into an Elementor "HTML" widget, or a WordPress
+  Paste the TWO blocks below into an Elementor "HTML" widget, or a WordPress
   "Custom HTML" block, on the page where you want the calendar to appear.
-  Do not paste it into the theme header, footer or functions.php.
+  (The config block, then the calendar block.) Do not paste it into the theme
+  header, footer or functions.php.
 
   WHAT IT DOES
-  Shows the live booking calendar, and copies every booking to
-  sales@outdoor.ie — confirmation, calendar invite, reschedules and
+  Shows the live booking calendar and copies every booking to the address set
+  in `notify` below — confirmation, calendar invite, reschedules and
   cancellations. Nothing is installed and no site settings change.
 
-  IF NOTHING APPEARS
-  A security plugin may be stripping <script> tags. Delete this block and
-  use the no-script version at the bottom of this file instead.
+  REUSE IT FOR ANOTHER BUSINESS
+  Edit the four values in the config block. That is the only thing you touch.
+  Everything else is boilerplate.
 
-  TO CHANGE
-  - Calendar height ....... min-height in the first line
-  - Brand colour .......... "cal-brand" near the bottom
-  - Notified address ...... guests
+  IF NOTHING APPEARS
+  A security plugin may be stripping <script> tags. Delete everything below
+  and use the no-script version at the very bottom of this file instead.
+
+  TO CHANGE (in the config block)
+  - calLink    ... the Cal.com event to show
+  - brandColor ... the calendar accent colour
+  - notify     ... the address every booking is copied to
+  - height     ... how tall the calendar is
   ============================================================================
 -->
 
-<div id="cal-booking" style="min-height:640px"></div>
+<!-- 1) CONFIG — the only part you edit -->
+<script>
+  window.BOOKING_CONFIG = {
+    calLink:    "loggdin/pergola-consultation",   // your Cal.com event link
+    brandColor: "#16513C",                          // calendar accent colour
+    notify:     "sales@outdoor.ie",                // every booking copied here
+    height:     "640px"                            // calendar height
+  };
+</script>
+
+<!-- 2) CALENDAR -->
+<div id="cal-booking" style="min-height:640px">
+  <noscript>
+    <p>This booking calendar needs JavaScript.
+       You can still <a href="https://cal.com/loggdin/pergola-consultation">book directly on Cal.com</a>.</p>
+  </noscript>
+</div>
 
 <script type="text/javascript">
 (function (C, A, L) {
@@ -44,15 +66,20 @@
   };
 })(window, "https://app.cal.com/embed/embed.js", "init");
 
+var cfg = window.BOOKING_CONFIG || {};
+var CAL_LINK   = cfg.calLink    || "loggdin/pergola-consultation";
+var BRAND      = cfg.brandColor || "#16513C";
+var NOTIFY     = cfg.notify     || "sales@outdoor.ie";
+
 Cal("init", "pergola", { origin: "https://app.cal.com" });
 
 Cal.ns.pergola("inline", {
   elementOrSelector: "#cal-booking",
-  calLink: "loggdin/pergola-consultation",
+  calLink: CAL_LINK,
   config: {
     layout: "month_view",
     theme: "light",
-    guests: "sales@outdoor.ie"          /* every booking is copied here */
+    guests: NOTIFY                      /* every booking is copied here */
   }
 });
 
@@ -61,16 +88,35 @@ Cal.ns.pergola("ui", {
   layout: "month_view",
   hideEventTypeDetails: false,
   cssVarsPerTheme: {
-    light: { "cal-brand": "#16513C" }   /* The Outdoor Scene green */
+    light: { "cal-brand": BRAND }       /* calendar accent colour */
   }
 });
+
+/* If the calendar hasn't rendered after 4s, drop in a plain iframe so the
+   page is never just blank. */
+(function () {
+  var target = document.getElementById("cal-booking");
+  var timer = setInterval(function () {
+    if (target.querySelector("iframe")) { clearInterval(timer); }
+  }, 200);
+  setTimeout(function () {
+    if (target.querySelector("iframe")) { clearInterval(timer); return; }
+    clearInterval(timer);
+    var f = document.createElement("iframe");
+    f.src = "https://cal.com/" + CAL_LINK + "?embed=true&layout=month_view&guests=" + encodeURIComponent(NOTIFY);
+    f.title = "Book a consultation";
+    f.style.cssText = "width:100%;height:760px;border:0";
+    target.appendChild(f);
+  }, 4000);
+})();
 </script>
 
 
 <!--
   ============================================================================
-  NO-SCRIPT VERSION — use this ONLY if the block above shows nothing.
-  Delete the block above first, then uncomment the two lines below.
+  NO-SCRIPT VERSION — use this ONLY if the block above shows nothing
+  (a security plugin is stripping <script> tags). Delete the two blocks above
+  first, then uncomment the iframe below.
   ============================================================================
 
 <iframe

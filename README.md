@@ -14,7 +14,9 @@ the page.
 | File | What it is |
 |---|---|
 | `index.html` | A standalone sample page. Open it in a browser to see and test the calendar before touching the website. |
-| `booking-embed.html` | Just the code to paste into WordPress. This is the only file that goes on the live site. |
+| `booking-embed.html` | Just the code to paste into WordPress. This is the only file that goes on the live site. It is **config-driven** — edit the four values at the top to point it at a different Cal.com event, brand colour, or notification address. |
+
+The same files work for any business: change the config and the calendar shows that business's bookings. That's how outdoor.ie can drop this into their own workspace without any code changes.
 
 ---
 
@@ -46,7 +48,7 @@ confirmation email.
 
 ### Step 2 — Paste in the calendar
 
-Copy everything inside `booking-embed.html`, then:
+Copy the **config block** and the **calendar block** from `booking-embed.html` (leave the comment block at the very top — it's just notes). If outdoor.ie want the calendar pointed at their own Cal.com event, brand colour or notification address, edit the four values in the config block first; that's the only thing to change. Then:
 
 **If you edit with Elementor**
 

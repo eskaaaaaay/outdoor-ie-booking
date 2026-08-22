@@ -54,6 +54,10 @@
 
   <!-- ===== booking calendar ===== -->
   <div id="cal-booking">
+    <noscript>
+      <p class="loading">This booking calendar needs JavaScript.
+        You can still <a href="https://cal.com/loggdin/pergola-consultation">book directly on Cal.com</a>.</p>
+    </noscript>
     <div class="loading" id="cal-loading">
       Loading the booking calendar…
       <br>
@@ -97,7 +101,7 @@
     layout: "month_view",
     hideEventTypeDetails: false,
     cssVarsPerTheme: {
-      light: { "cal-brand": "#16513C" }
+      light: { "cal-brand": "#16513C" }   /* The Outdoor Scene green */
     }
   });
 
@@ -113,7 +117,7 @@
       clearInterval(timer);
       if (loading) loading.style.display = "none";
       var f = document.createElement("iframe");
-      f.src = "https://cal.com/loggdin/pergola-consultation?embed=true&layout=month_view&guests=sales%40outdoor.ie";
+      f.src = "https://cal.com/loggdin/pergola-consultation?embed=true&layout=month_view&guests=" + encodeURIComponent("sales@outdoor.ie");
       f.title = "Book a pergola design consultation";
       f.style.cssText = "width:100%;height:760px;border:0";
       target.appendChild(f);
