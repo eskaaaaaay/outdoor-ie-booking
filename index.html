@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Sample booking page for outdoor.ie</title>
+<style>
+  :root {
+    --brand: #16513C;
+    --ink:   #16201C;
+    --ink-2: #55605B;
+    --line:  #E2E4E0;
+    --paper: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 48px 24px 64px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 980px; margin: 0 auto; }
+  h1 {
+    margin: 0 0 10px;
+    font-size: clamp(1.6rem, 4vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  p.sub { margin: 0 0 28px; color: var(--ink-2); font-size: 1rem; max-width: 60ch; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 0 0 28px; }
+  #cal-booking { width: 100%; min-height: 640px; }
+  .loading {
+    padding: 28px;
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+  .loading a { color: var(--brand); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <h1>Sample booking page for outdoor.ie</h1>
+  <p class="sub">Pick a time below to book a pergola design consultation. This is a working calendar — a real booking will be made.</p>
+  <hr>
+
+  <!-- ===== booking calendar ===== -->
+  <div id="cal-booking">
+    <div class="loading" id="cal-loading">
+      Loading the booking calendar…
+      <br>
+      If nothing appears, <a href="https://cal.com/loggdin/pergola-consultation">open the booking page directly</a>.
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  (function (C, A, L) {
+    let p = function (a, ar) { a.q.push(ar); };
+    let d = C.document;
+    C.Cal = C.Cal || function () {
+      let cal = C.Cal; let ar = arguments;
+      if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; }
+      if (ar[0] === L) {
+        const api = function () { p(api, arguments); };
+        const namespace = ar[1];
+        api.q = api.q || [];
+        if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); }
+        else p(cal, ar);
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  Cal("init", "pergola", { origin: "https://app.cal.com" });
+
+  Cal.ns.pergola("inline", {
+    elementOrSelector: "#cal-booking",
+    calLink: "loggdin/pergola-consultation",
+    config: {
+      layout: "month_view",
+      theme: "light",
+      guests: "sales@outdoor.ie"          /* every booking is copied here */
+    }
+  });
+
+  Cal.ns.pergola("ui", {
+    theme: "light",
+    layout: "month_view",
+    hideEventTypeDetails: false,
+    cssVarsPerTheme: {
+      light: { "cal-brand": "#16513C" }
+    }
+  });
+
+  /* If the script hasn't produced a calendar in 4 seconds, fall back to a plain iframe. */
+  (function () {
+    var target = document.getElementById("cal-booking");
+    var loading = document.getElementById("cal-loading");
+    var timer = setInterval(function () {
+      if (target.querySelector("iframe")) { if (loading) loading.style.display = "none"; clearInterval(timer); }
+    }, 200);
+    setTimeout(function () {
+      if (target.querySelector("iframe")) return;
+      clearInterval(timer);
+      if (loading) loading.style.display = "none";
+      var f = document.createElement("iframe");
+      f.src = "https://cal.com/loggdin/pergola-consultation?embed=true&layout=month_view&guests=sales%40outdoor.ie";
+      f.title = "Book a pergola design consultation";
+      f.style.cssText = "width:100%;height:760px;border:0";
+      target.appendChild(f);
+    }, 4000);
+  })();
+  </script>
+
+</div>
+
+</body>
+</html>

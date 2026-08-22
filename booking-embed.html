@@ -1,0 +1,82 @@
+<!--
+  ============================================================================
+  THE OUTDOOR SCENE — pergola consultation booking calendar
+
+  WHERE THIS GOES
+  Paste everything below into an Elementor "HTML" widget, or a WordPress
+  "Custom HTML" block, on the page where you want the calendar to appear.
+  Do not paste it into the theme header, footer or functions.php.
+
+  WHAT IT DOES
+  Shows the live booking calendar, and copies every booking to
+  sales@outdoor.ie — confirmation, calendar invite, reschedules and
+  cancellations. Nothing is installed and no site settings change.
+
+  IF NOTHING APPEARS
+  A security plugin may be stripping <script> tags. Delete this block and
+  use the no-script version at the bottom of this file instead.
+
+  TO CHANGE
+  - Calendar height ....... min-height in the first line
+  - Brand colour .......... "cal-brand" near the bottom
+  - Notified address ...... guests
+  ============================================================================
+-->
+
+<div id="cal-booking" style="min-height:640px"></div>
+
+<script type="text/javascript">
+(function (C, A, L) {
+  let p = function (a, ar) { a.q.push(ar); };
+  let d = C.document;
+  C.Cal = C.Cal || function () {
+    let cal = C.Cal; let ar = arguments;
+    if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; }
+    if (ar[0] === L) {
+      const api = function () { p(api, arguments); };
+      const namespace = ar[1];
+      api.q = api.q || [];
+      if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); }
+      else p(cal, ar);
+      return;
+    }
+    p(cal, ar);
+  };
+})(window, "https://app.cal.com/embed/embed.js", "init");
+
+Cal("init", "pergola", { origin: "https://app.cal.com" });
+
+Cal.ns.pergola("inline", {
+  elementOrSelector: "#cal-booking",
+  calLink: "loggdin/pergola-consultation",
+  config: {
+    layout: "month_view",
+    theme: "light",
+    guests: "sales@outdoor.ie"          /* every booking is copied here */
+  }
+});
+
+Cal.ns.pergola("ui", {
+  theme: "light",
+  layout: "month_view",
+  hideEventTypeDetails: false,
+  cssVarsPerTheme: {
+    light: { "cal-brand": "#16513C" }   /* The Outdoor Scene green */
+  }
+});
+</script>
+
+
+<!--
+  ============================================================================
+  NO-SCRIPT VERSION — use this ONLY if the block above shows nothing.
+  Delete the block above first, then uncomment the two lines below.
+  ============================================================================
+
+<iframe
+  src="https://cal.com/loggdin/pergola-consultation?embed=true&layout=month_view&guests=sales%40outdoor.ie"
+  title="Book a pergola design consultation"
+  style="width:100%;height:760px;border:0"
+  loading="eager"></iframe>
+
+-->
