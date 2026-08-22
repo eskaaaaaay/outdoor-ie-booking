@@ -195,30 +195,6 @@ function circ(s, x, y, d, fill, txt, tc) {
 })();
 
 // ========================================================================
-// 7 — INVESTMENT (light, placeholders)
-// ========================================================================
-(() => {
-  const s = pres.addSlide(); bg(s, C.paper);
-  eyebrow(s, "Investment", 0.9, 0.7);
-  h1(s, "What it costs outdoor.ie", 0.9, 1.05);
-  s.addText("Set up once, then managed by Loggdin. Specific figures confirmed in the accompanying quote.", { x: 0.9, y: 2.05, w: 11.4, h: 0.5, fontFace: SANS, fontSize: 15, color: C.ink2 });
-  const cards = [
-    ["Setup", "One-time", "We build the page, wire up the Cal.com calendar, availability and branding."],
-    ["Ongoing", "Monthly", "We manage the calendar, handle changes to hours/holidays, and keep the embed working."],
-    ["Included", "Always", "Reminders, reschedule/cancel links, calendar invites, and the sales@ copy."],
-  ];
-  const cw = 3.7, gap = 0.45, x0 = 0.9, y0 = 3.0, ch = 3.0;
-  cards.forEach((c, i) => {
-    const x = x0 + i * (cw + gap);
-    card(s, x, y0, cw, ch, C.paper2, C.line);
-    s.addText(c[0].toUpperCase(), { x: x + 0.35, y: y0 + 0.3, w: cw - 0.7, h: 0.4, fontFace: MONO, fontSize: 13, bold: true, color: C.green, charSpacing: 2 });
-    s.addText(c[1], { x: x + 0.35, y: y0 + 0.75, w: cw - 0.7, h: 0.5, fontFace: SANS, fontSize: 20, bold: true, color: C.ink });
-    s.addText(c[2], { x: x + 0.35, y: y0 + 1.4, w: cw - 0.7, h: 1.4, fontFace: SANS, fontSize: 13, color: C.ink2, lineSpacing: 18 });
-  });
-  s.addNotes("Investment slide. Figures are placeholders — confirm against the quote document and fill in real numbers.");
-})();
-
-// ========================================================================
 // 8 — VALUE (dark)
 // ========================================================================
 (() => {
