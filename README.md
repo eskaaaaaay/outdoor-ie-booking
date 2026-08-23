@@ -21,13 +21,13 @@ A working online booking calendar for pergola design consultations, ready to add
 
 The same files work for any business: change the config and the calendar shows that business's bookings. That's how outdoor.ie can drop this into their own workspace without any code changes.
 
-**Current state:** the embed is wired to Loggdin's demo calendar at `cal.com/loggdin/pergola-consultation` so the page renders immediately when previewed. Before going live, outdoor.ie swap that for their own Cal.com event (see Step 1 and the "Changing things later" table).
+**Current state — live on Loggdin's calendar:** right now the embed points at Loggdin's own Cal.com event, `cal.com/loggdin/pergola-consultation`, so the page is live and bookable immediately. Any bookings made through it currently land on Loggdin's calendar. A client who wants their own bookings simply swaps in their own Cal.com event (Step 1 + the "Changing things later" table) — no other changes needed. Until they do, it keeps running on Loggdin's calendar.
 
 ---
 
 ## 1. Set up your Cal.com calendar (one-time)
 
-The calendar runs on [Cal.com](https://cal.com). outdoor.ie need their own account and one event type before the embed will show their availability.
+The calendar runs on [Cal.com](https://cal.com). As shipped, it uses Loggdin's calendar so it works straight away. To make bookings land on the client's own diary instead, they create their own Cal.com account and one event type, then point the embed at it.
 
 1. **Sign up** at cal.com and pick a username (this becomes part of your booking link).
 2. **Create an event type** for the consultation:
@@ -132,7 +132,7 @@ Use a personal email address, not a work one, so you see exactly what a customer
 | To change | Where |
 |---|---|
 | Opening hours, holidays, days off | In your Cal.com availability settings |
-| The Cal.com event shown | `calLink` in the config block — currently `loggdin/pergola-consultation` (Loggdin's demo); swap for your own event before going live |
+| The Cal.com event shown | `calLink` in the config block — currently `loggdin/pergola-consultation` (Loggdin's live calendar); swap for the client's own event to send bookings to their diary |
 | The calendar accent colour | `brandColor` in the config block |
 | How tall the calendar is | `height` in the config block |
 | Which address is copied on bookings | `notify` (the `guests` value) in the config block |
