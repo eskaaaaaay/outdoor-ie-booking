@@ -142,30 +142,6 @@ function circ(s, x, y, d, fill, txt, tc) {
 })();
 
 // ========================================================================
-// 5 — HOW IT WORKS (light)
-// ========================================================================
-(() => {
-  const s = pres.addSlide(); bg(s, C.paper);
-  eyebrow(s, "How it works", 0.9, 0.7);
-  h1(s, "One code block. Three moving parts.", 0.9, 1.05);
-  const panels = [
-    ["01 · We drop it in", "A single config-driven block goes on a new WordPress page. Edit four values — that's the only code touch."],
-    ["02 · Customer books", "They open the page, see live slots, and book with their email. Reschedule or cancel any time from the email."],
-    ["03 · Booking lands", "Every booking copies sales@outdoor.ie and drops into the team calendar. No one logs in to check."],
-  ];
-  const cw = 3.7, gap = 0.45, x0 = 0.9, y0 = 2.75, ch = 3.2;
-  panels.forEach((p, i) => {
-    const x = x0 + i * (cw + gap);
-    card(s, x, y0, cw, ch, C.paper2, C.line);
-    s.addShape(pres.shapes.RECTANGLE, { x, y: y0, w: cw, h: 0.12, fill: { color: C.green }, line: { type: "none" } });
-    s.addText(p[0], { x: x + 0.35, y: y0 + 0.35, w: cw - 0.7, h: 0.7, fontFace: SANS, fontSize: 17, bold: true, color: C.green });
-    s.addText(p[1], { x: x + 0.35, y: y0 + 1.15, w: cw - 0.7, h: 1.8, fontFace: SANS, fontSize: 14, color: C.ink2, lineSpacing: 20 });
-  });
-  s.addText("Backend runs on Cal.com — availability, invites and reminders are managed there, not in your site.", { x: 0.9, y: 6.4, w: 11.5, h: 0.5, fontFace: SANS, fontSize: 13, italic: true, color: C.ink2 });
-  s.addNotes("Paste one block, customer books, booking lands in inbox + calendar. Cal.com is the managed backend.");
-})();
-
-// ========================================================================
 // 6 — COMPARISON (light)
 // ========================================================================
 (() => {

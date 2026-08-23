@@ -21,6 +21,8 @@ A working online booking calendar for pergola design consultations, ready to add
 
 The same files work for any business: change the config and the calendar shows that business's bookings. That's how outdoor.ie can drop this into their own workspace without any code changes.
 
+**Current state:** the embed is wired to Loggdin's demo calendar at `cal.com/loggdin/pergola-consultation` so the page renders immediately when previewed. Before going live, outdoor.ie swap that for their own Cal.com event (see Step 1 and the "Changing things later" table).
+
 ---
 
 ## 1. Set up your Cal.com calendar (one-time)
@@ -130,7 +132,7 @@ Use a personal email address, not a work one, so you see exactly what a customer
 | To change | Where |
 |---|---|
 | Opening hours, holidays, days off | In your Cal.com availability settings |
-| The Cal.com event shown | `calLink` in the config block |
+| The Cal.com event shown | `calLink` in the config block — currently `loggdin/pergola-consultation` (Loggdin's demo); swap for your own event before going live |
 | The calendar accent colour | `brandColor` in the config block |
 | How tall the calendar is | `height` in the config block |
 | Which address is copied on bookings | `notify` (the `guests` value) in the config block |
